@@ -173,10 +173,23 @@ Redis 5.0 后新增的数据结构，用于可持久化的消息队列。几乎�
 * `xadd key id <*> field1 value1 ...` 将制定消息数据追加到制定队列（key）中，* 表示最新生成的ID（当前时间+序列号）
 * `xread [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] ID [ID ...]` 从消息队列中读取，COUNT：读取条数，BLOCK：阻塞读（默认不阻塞） key：队列名称 ID：消息ID
 * `xrange key start end [COUNT]` 读取队列中给定 ID 范围的消息，COUNT：返回消息数（消息 ID 从小到大）
-* `xrevrange key start en [COUNT]` 同上，消息 ID 从大到小
+* `xrevrange key start en [COUNT]` 同上，消息 ID 从大到小
 * `xdel key id` 删除队列消息
 * `xgroup create key groupname id` 创建一个新的消息组
 * `xgroup destory key groupname` 删除指定的消费组
 * `xgroup delconsumer key groupname cname` 删除指定消费组中的某个消费者
 * `xgroup setid key id` 修改指定消息的最大ID
 * `xreadgroup group groupname consumer COUNT stream key` 从队列中的消费组创建消费者，并消费数据（consumer不存在则创建）
+
+
+### 其他常用命令
+
+* `keys pattern` 返回满足给定 pattern 的所有 key
+* `del key` 删除 key
+* `exists key` 确定一个 key 是否存在
+* `expire key seconds` 设置 key 的生存时间（秒），超时则自动删除
+* `ttl key` 查看 key 的生存时间
+* `persist key` 清除生存时间
+* `pexpire key milliseconds` 生存时间设置单位为：毫秒
+* `rename oldkey newkey` 重命名
+* `type key` 显示指定 key 的数据类型
